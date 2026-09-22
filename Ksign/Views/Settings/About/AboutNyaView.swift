@@ -8,7 +8,6 @@
 import SwiftUI
 import NimbleViews
 import NimbleJSON
-import NukeUI
 
 // MARK: - View
 struct AboutNyaView: View {
@@ -37,10 +36,7 @@ struct AboutNyaView: View {
 			.listRowBackground(EmptyView())
 
 			NBSection(.localized("Developer")) {
-				_credit(
-					name: "Abbas Mousawi",
-					photoUrl: URL(string: "https://f.top4top.io/p_3915l09s51.jpg")
-				)
+				_credit(name: "Abbas Mousawi")
 			}
 		}
 	}
@@ -49,23 +45,10 @@ struct AboutNyaView: View {
 // MARK: - Extension: view
 extension AboutNyaView {
 	@ViewBuilder
-	private func _credit(
-		name: String,
-		photoUrl: URL?
-	) -> some View {
+	private func _credit(name: String) -> some View {
 		HStack(spacing: 12) {
-			if let photoUrl {
-				LazyImage(url: photoUrl) { state in
-					if let image = state.image {
-						image
-							.appIconStyle(size: 46, isCircle: true)
-					} else {
-						Circle()
-							.fill(Color(uiColor: .secondarySystemBackground))
-							.frame(width: 46, height: 46)
-					}
-				}
-			}
+			Image("DeveloperPhoto")
+				.appIconStyle(size: 46, isCircle: true)
 
 			VStack(alignment: .leading, spacing: 2) {
 				Text(name)
