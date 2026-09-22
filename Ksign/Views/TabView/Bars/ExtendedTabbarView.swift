@@ -16,7 +16,6 @@ struct ExtendedTabbarView: View {
 	@StateObject var viewModel = SourcesViewModel.shared
 	
 	@State private var _isAddingPresenting = false
-	@State private var _selectedTab: TabEnum = .appstore
 	
 	@FetchRequest(
 		entity: AltSource.entity(),
@@ -25,15 +24,15 @@ struct ExtendedTabbarView: View {
 	) private var _sources: FetchedResults<AltSource>
 		
 	var body: some View {
-		TabView(selection: $_selectedTab) {
+		TabView {
 			ForEach(TabEnum.defaultTabs, id: \.hashValue) { tab in
-				Tab(tab.title, systemImage: tab.icon, value: tab) {
+				Tab(tab.title, systemImage: tab.icon) {
 					TabEnum.view(for: tab)
 				}
 			}
 			
 			ForEach(TabEnum.customizableTabs, id: \.hashValue) { tab in
-				Tab(tab.title, systemImage: tab.icon, value: tab) {
+				Tab(tab.title, systemImage: tab.icon) {
 					TabEnum.view(for: tab)
 				}
 				.customizationID("tab.\(tab.rawValue)")
